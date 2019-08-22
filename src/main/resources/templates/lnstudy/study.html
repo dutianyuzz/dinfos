@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>栏目管理</title>
+    <link rel="stylesheet" href="../css/layui.css"/>
+    <link rel="stylesheet" href="../css/stylelist.css"/>
+</head>
+<body>
+<form method="post" action="##">
+    <select style="background: #729EA5;height: 30px;border-width: 0px;font-size: 12px;color: white ;width: 60px;">
+        <option value="volvo">2019</option>
+        <option value="saab">2018</option>
+        <option value="mercedes">2017</option>
+        <option value="audi">2016</option>
+    </select>
+</form>
+<div><h1>年度学习档案</h1>
+    <div h2>课程档案</div>
+    <table class="tftable" id='course'>
+        <tr>
+            <th>编号</th>
+            <th>课程名称</th>
+            <th>课程类型</th>
+        </tr>
+    </table>
+    <div h2>考试档案</div>
+    <table class="tftable" id='exam'>
+        <tr>
+            <th>编号</th>
+            <th>考试名称</th>
+            <th>考试分数</th>
+        </tr>
+    </table>
+</div>
+<script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: "../json/text.json",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                if (data)
+                $.each(data.name, function (i, item) {
+                    var tr;
+                    tr = '<td>' + item.id + '</td>' +
+                            '<td>' + item.name + '</td>' +
+                            '<td>' + item.type + '</td>';
+                    $("#course").append('<tr>' + tr + '</tr>')
+                })
+                $.each(data.links, function (i, item) {
+                    var tr;
+                    tr = '<td>' + item.id + '</td>' +
+                            '<td>' + item.name + '</td>' +
+                            '<td>' + item.score + '</td>';
+                    $("#exam").append('<tr>' + tr + '</tr>')
+                })
+            },
+            error: function () {
+                alert("数据加载错误!");
+            }
+        })
+    });
+</script>
+</body>
+</html>
