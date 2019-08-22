@@ -74,6 +74,7 @@ public class Test implements RedisCacheKey{
         System.out.println(name);
         System.out.println(redisTemplate.hasKey(key));
     }*/
+
     @Autowired
     RedisUtil redisUtil;
     @org.junit.Test
