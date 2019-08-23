@@ -81,10 +81,10 @@ public class Test implements RedisCacheKey{
     public void redisTest(){
         try {
             String test="这是一条测试数据";
-            redisUtil.set(TEST_INFO,test, RedisConstants.datebase2);
-            redisUtil.set(TEST_USER,"dutianyu",RedisConstants.datebase3);
-            String value = redisUtil.get(TEST_INFO,RedisConstants.datebase2).toString();
-            redisUtil.Rpush("test:dty:push","dutianyu",RedisConstants.datebase3);
+            redisUtil.set(TEST_INFO,test, RedisConstants.db2);
+            redisUtil.set(TEST_USER,"dutianyu",RedisConstants.db3);
+            String value = redisUtil.get(TEST_INFO,RedisConstants.db2).toString();
+            redisUtil.Rpush("test:lns:push","放牛小二郎", RedisConstants.db5);
             System.out.println("------------"+value);
         }catch (Exception e) {
             e.printStackTrace();

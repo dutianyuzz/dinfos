@@ -430,10 +430,10 @@ public class RedisUtil {
 	}
 
 	/**
-	 * 将list放入缓存
-	 * @param key 键
-	 * @param value 值
-	 * @param indexdb 库
+	 * 在列表中添加一个或多个值  用于队列
+	 * @param key
+	 * @param value
+	 * @param indexdb
 	 * @return
 	 */
 	public boolean Rpush(String key, Object value,Integer indexdb) {
@@ -448,7 +448,7 @@ public class RedisUtil {
 	}
 
 	/**
-	 * 将list放入缓存
+	 * 在列表中添加一个或多个值 用于队列  (失效时间设定)
 	 * @param key 键
 	 * @param value 值
 	 * @param time 时间(秒)
@@ -468,7 +468,7 @@ public class RedisUtil {
 	}
 
 	/**
-	 * 将list放入缓存
+	 * 在列表中添加一个或多个值 用于队列
 	 * @param key 键
 	 * @param value 值
 	 * @param indexdb 库
@@ -486,7 +486,7 @@ public class RedisUtil {
 	}
 
 	/**
-	 * 将list放入缓存
+	 * 在列表中添加一个或多个值 用于队列
 	 * @param key 键
 	 * @param value 值
 	 * @param indexdb 库
@@ -506,9 +506,9 @@ public class RedisUtil {
 	}
 
 	/**
-	 * 移出并获取列表的第一个元素
-	 * @param key 键
-	 * @param indexdb 库
+	 * 移出并获取列表的第一个元素  用于队列
+	 * @param key
+	 * @param indexdb
      * @return
      */
 	public boolean Lpop(String key,Integer indexdb){
@@ -523,7 +523,7 @@ public class RedisUtil {
 	}
 
 	/**
-	 * 移除并获取列表最后一个元素
+	 * 移除并获取列表最后一个元素  用于队列
 	 * @param key 键
 	 * @param indexdb 库
      * @return
@@ -574,7 +574,10 @@ public class RedisUtil {
 	}
 
 	public static void main(String[] args) {
-		/*JedisPool jedisPool = new JedisPool(null,"localhost",6379,100,"123456");
+		/**
+		 * Jedis 封装
+         */
+		/*JedisPool jedisPool = new JedisPool(null,"192.168.184.12",6379,100,"1qaz2wsx");
 		Jedis jedis = jedisPool.getResource();
 		//r.get("", RedisConstants.datebase4);
 		jedis.select(RedisConstants.datebase4);
