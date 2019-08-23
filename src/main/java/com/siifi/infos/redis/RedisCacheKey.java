@@ -6,4 +6,5 @@ package com.siifi.infos.redis;
 public interface RedisCacheKey {
 
     String TEST_INFO="test:info";
+    String TEST_USER="test:user";
 }

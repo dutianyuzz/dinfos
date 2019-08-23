@@ -8,6 +8,8 @@ public class RedisConstants {
 
     public static final String spilt=":";
 
+    public static final Integer datebase0=0;
+
     public static final Integer datebase1=1;
 
     public static final Integer datebase2=2;
@@ -37,8 +39,6 @@ public class RedisConstants {
     public static final Integer datebase14=14;
 
     public static final Integer datebase15=15;
-
-    public static final Integer datebase16=16;
 
     public RedisConstants() {
 

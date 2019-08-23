@@ -53,8 +53,9 @@ public class RedisUtil {
 	 * @param key 键
 	 * @return true 存在 false不存在
 	 */
-	public boolean hasKey(String key){
+	public boolean hasKey(String key,Integer indexdb){
 		try {
+			redisTemplate.indexdb.set(indexdb);
 			return redisTemplate.hasKey(key);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,8 +114,9 @@ public class RedisUtil {
 	 * @param time 时间(秒) time要大于0 如果time小于等于0 将设置无限期
 	 * @return true成功 false 失败
 	 */
-	public boolean set(String key,Object value,long time){
+	public boolean set(String key,Object value,long time,Integer indexdb){
 		try {
+			redisTemplate.indexdb.set(indexdb);
 			if(time>0){
 				redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
 			}else{
@@ -431,11 +433,12 @@ public class RedisUtil {
 	 * 将list放入缓存
 	 * @param key 键
 	 * @param value 值
-	 * @param time 时间(秒)
+	 * @param indexdb 库
 	 * @return
 	 */
-	public boolean lSet(String key, Object value) {
+	public boolean Rpush(String key, Object value,Integer indexdb) {
 		try {
+			redisTemplate.indexdb.set(indexdb);
 			redisTemplate.opsForList().rightPush(key, value);
 			return true;
 		} catch (Exception e) {
@@ -449,10 +452,12 @@ public class RedisUtil {
 	 * @param key 键
 	 * @param value 值
 	 * @param time 时间(秒)
+	 * @param indexdb  库
 	 * @return
 	 */
-	public boolean lSet(String key, Object value, long time) {
+	public boolean RpushTime(String key, Object value, long time,Integer indexdb) {
 		try {
+			redisTemplate.indexdb.set(indexdb);
 			redisTemplate.opsForList().rightPush(key, value);
 			if (time > 0) expire(key, time);
 			return true;
@@ -466,11 +471,12 @@ public class RedisUtil {
 	 * 将list放入缓存
 	 * @param key 键
 	 * @param value 值
-	 * @param time 时间(秒)
+	 * @param indexdb 库
 	 * @return
 	 */
-	public boolean lSet(String key, List<Object> value) {
+	public boolean RpushList(String key, List<Object> value,Integer indexdb) {
 		try {
+			redisTemplate.indexdb.set(indexdb);
 			redisTemplate.opsForList().rightPushAll(key, value);
 			return true;
 		} catch (Exception e) {
@@ -483,15 +489,51 @@ public class RedisUtil {
 	 * 将list放入缓存
 	 * @param key 键
 	 * @param value 值
+	 * @param indexdb 库
 	 * @param time 时间(秒)
 	 * @return
 	 */
-	public boolean lSet(String key, List<Object> value, long time) {
+	public boolean RpushListTime(String key, List<Object> value, long time,Integer indexdb) {
 		try {
+			redisTemplate.indexdb.set(indexdb);
 			redisTemplate.opsForList().rightPushAll(key, value);
 			if (time > 0) expire(key, time);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * 移出并获取列表的第一个元素
+	 * @param key 键
+	 * @param indexdb 库
+     * @return
+     */
+	public boolean Lpop(String key,Integer indexdb){
+		try {
+			redisTemplate.indexdb.set(indexdb);
+			redisTemplate.opsForList().leftPop(key);
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * 移除并获取列表最后一个元素
+	 * @param key 键
+	 * @param indexdb 库
+     * @return
+     */
+	public boolean Rpop(String key,Integer indexdb){
+		try {
+			redisTemplate.indexdb.set(indexdb);
+			redisTemplate.opsForList().rightPop(key);
+			return true;
+		}catch (Exception e){
 			e.printStackTrace();
 			return false;
 		}
